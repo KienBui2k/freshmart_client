@@ -1,0 +1,95 @@
+.add_category_section {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    .add_category_header {
+        height: 160px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url("../images/account_img.webp");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        color: white;
+        font-size: 40px;
+    }
+    .add_category_content {
+        height: calc(100vh - 160px);
+        background-color: white;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .addform {
+            height: 600px;
+            width: 92%;
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .add_categoty_title {
+                height: 100%;
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                h2 {
+                    font-size: 40px;
+                    margin-left: 20px;
+                }
+                .group_input {
+                    margin-top: 40px;
+                    height: 320px;
+                    width: 100%;
+                    flex-direction: column;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .input_text {
+                        width: 94%;
+                        height: 50px !important;
+                        border: 1px solid black;
+                        resize: none;
+                        padding: 12px;
+                        border-radius: 4px;
+                    }
+                    .btn_add_newCategory {
+                        width: 80px;
+                        height: 40px;
+                        background-color: rgb(59, 56, 56);
+                        font-size: 20px;
+                        font-weight: 500;
+                        color: white;
+                        border-radius: 20px;
+                    }
+                }
+            }
+            .add_category_avatar {
+                height: 100%;
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                input {
+                    margin: 20px 0;
+                }
+                .category_avatar {
+                    height: 70%;
+                    width: 700px;
+                    margin-top: 40px;
+                    display: flex;
+                    justify-content: center;
+                     align-items: center;
+                    img {
+                        border-radius: 50%;
+                        height: 100%;
+                        max-width: 70%;
+                    }
+                }
+            }
+        }
+    }
+}

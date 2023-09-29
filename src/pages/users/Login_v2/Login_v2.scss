@@ -1,0 +1,238 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+.account_section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+}
+.account_header {
+    width: 100vw;
+    height: 300px;
+    background-image: url("../images/account_img.webp");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h2 {
+        color: white;
+        font-weight: 700;
+        font-size: 42px;
+    }
+}
+.account_form {
+    width: 100vw;
+    background-image: url("https://freshmart-vinovatheme.myshopify.com/cdn/shop/files/05_index_v5_02_1920x.jpg?v=1614305459");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper {
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    max-width: 520px;
+    width: 100%;
+    border-radius: 12px;
+    padding: 20px 30px 120px;
+    background-color: rgba(#34811c, 0.6);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 100px 0 140px 0;
+    &.active {
+        .form.login {
+            bottom: -13%;
+            border-radius: 35%;
+            box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .signup header {
+            opacity: 0.6;
+        }
+        .form.login header {
+            color: #333;
+            opacity: 1;
+            // & {
+            //     opacity: 1;
+            // }
+        }
+    }
+
+    .form.login {
+        position: absolute;
+        left: 50%;
+        bottom: -85%;
+        transform: translateX(-50%);
+        width: calc(100% + 220px);
+        padding: 20px 140px;
+        border-radius: 50%;
+        height: 100%;
+        background: #fff;
+        transition: all 0.6s ease;
+    }
+
+    .form header {
+        font-size: 30px;
+        text-align: center;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .form.login header {
+        color: #333;
+        opacity: 0.6;
+        // & {
+        //     opacity: 1;
+        // }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        // gap: 20px;
+        margin-top: 40px;
+    }
+
+    form input {
+        height: 40px;
+        outline: none;
+        border: none;
+        padding: 0 15px;
+        font-size: 16px;
+        font-weight: 400;
+        color: #333;
+        border-radius: 8px;
+        background: #fff;
+        border: 1px solid #aaa;
+        &.login {
+            border: 1px solid #aaa;
+
+            &:focus {
+                box-shadow: 0 1px 0 #ddd;
+            }
+        }
+    }
+    .register {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        height: 60px;
+        border-radius: 24px;
+        background-color: white;
+        font-size: 24px;
+        color: #262525;
+    }
+    form .checkbox {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        input[type="checkbox"] {
+            height: 16px;
+            width: 16px;
+            accent-color: #fff;
+            cursor: pointer;
+        }
+
+        label {
+            cursor: pointer;
+            color: #fff;
+        }
+    }
+
+    .form span {
+        color: #333;
+        margin-bottom: 8px;
+        margin-left: 20px;
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
+    form button {
+        margin-top: 15px;
+        padding: none;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        &.login {
+            background-color: #34811c;
+            color: #fff;
+            border: none;
+            height: 60px;
+            border-radius: 24px;
+        }
+    }
+}
+header {
+    text-align: center;
+}
+.form_name {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 28px;
+    input {
+        width: 50%;
+    }
+}
+.form_password {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 68px;
+
+    .input_passswwoord {
+        display: flex;
+        width: 100%;
+        height: 40px;
+        gap: 10px;
+        input {
+            width: 50%;
+        }
+    }
+}
+.form_email {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 68px;
+}
+.form_userName {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 68px;
+}
+.form_email_login {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 68px;
+}
+.form_pw_login {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 68px;
+}
+
+
+.backToLogin {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 24px;
+}
+

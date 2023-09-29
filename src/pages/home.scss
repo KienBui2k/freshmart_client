@@ -1,0 +1,17 @@
+.home_page_section {
+    width: 100%;
+     min-height: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #eff2f1;
+    .home_page_content {
+        width: 100%;
+        max-width: 1440px;
+        height: 100%;
+        min-height: 700px;
+        // margin-bottom: 40px;
+        
+    }
+}

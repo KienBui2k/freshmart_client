@@ -1,0 +1,55 @@
+.dropdown_user:hover > .dropdown-menu {
+    display: block;
+    position: absolute;
+}
+
+.dropdown_user > .dropdown-toggle:active {
+    pointer-events: none;
+}
+.dropdown_user {
+    position: relative !important;
+    &:hover {
+        .dropdown-menu {
+            position: absolute;         
+        }
+    }
+}
+.account-btn {
+    border: none !important;
+    box-shadow: none;
+    font-size: 30px;
+
+    svg {
+        color: black !important;
+        font-weight: 400;
+    }
+}
+
+.dropdown-toggle:after {
+    display: none;
+}
+.dropdown_user:hover {
+    .account-btn {
+        // background-color: #c9cecc;
+        svg {
+            color: black !important;
+            // font-weight: 400px;
+        }
+    }
+}
+.dropdown_user {
+    border-radius: 8px;
+    button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0px;
+        color: white;
+        span {
+            font-size: 7px !important;
+        }
+        .userName {
+            font-weight: 900;
+        }
+    }
+}

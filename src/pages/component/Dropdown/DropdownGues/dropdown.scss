@@ -1,0 +1,56 @@
+.dropdown_user:hover > .dropdown-menu {
+    display: block;
+    position: absolute;
+}
+.dropdown_user {
+    position: relative !important;
+    &:hover {
+        .dropdown-menu {
+            position: absolute;
+           
+        }
+    }
+}
+
+.dropdown_user > .dropdown-toggle:active {
+    pointer-events: none;
+}
+
+.account-btn {
+    border: none !important;
+    box-shadow: none;
+    font-size: 30px;
+
+    svg {
+        color: black !important;
+    }
+}
+
+.dropdown-toggle:after {
+    display: none;
+}
+.dropdown_user:hover {
+    .account-btn {
+        // background-color: #c9cecc;
+        svg {
+            color: black !important;
+        }
+    }
+}
+.dropdown_user {
+    border-radius: 8px;
+    button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0px;
+        color: white;
+        box-shadow: none !important;
+        span {
+            font-size: 7px !important;
+        }
+        .userName {
+            font-weight: 900;
+        }
+    }
+}
