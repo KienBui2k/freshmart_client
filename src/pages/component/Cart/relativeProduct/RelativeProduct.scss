@@ -1,0 +1,78 @@
+.multicarousel-container {
+    height: 440px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    .list_new_title {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        // gap: 12px;
+        h2 {
+            font-size: 36px;
+            margin: 16px 0;
+            font-weight: 450;
+            color: #78b144;
+            font-style: italic;
+        }
+    }
+    .list_new_product {
+        height: 80%;
+        width: 100%;
+        
+        .product {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 4px;
+            height: 100%;
+            cursor: pointer;
+            &:hover{
+                p{
+                    color: white;
+                    &::before{
+                        width: 100%;
+                    }
+                }
+            }
+            img {
+                width: 80%;
+                border-radius: 8px;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            p {
+                font-size: 18px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                font-style: oblique;
+                font-family: "Playfair Display", serif;
+                font-weight: 500;
+                color: #6aac2d;
+                padding: 4px 8px;
+                position: relative;
+                z-index: 1;
+                min-width: 140px;
+                display: flex;
+                justify-content: center;
+                &::before {
+                    content: "";
+                    background: url("https://freshmart-vinovatheme.myshopify.com/cdn/shop/files/bg-categoriestab_150x.png?v=1637134262")
+                        no-repeat;
+                    width: 0;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    transition: width 0.2s ease;
+                    z-index: -1;
+                }
+            }
+        }
+    }
+}

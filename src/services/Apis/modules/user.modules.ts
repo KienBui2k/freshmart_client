@@ -1,6 +1,14 @@
 import axios from "axios";
 
 export default {
+        googleLogin: async (data: any) => {
+            console.log("data",data);
+            
+        return await axios.post(
+            import.meta.env.VITE_SV_HOST + "users/google-login",
+            data,
+        )
+    },
     register: async function (newUser: any) {
         return await axios.post(import.meta.env.VITE_SV_HOST + "users", newUser)
     },
@@ -17,7 +25,7 @@ export default {
     //     })
     // }
     authentication:async function (data:any){
-        console.log("data",data);        
+      
         return await axios.post(import.meta.env.VITE_SV_HOST +"authentication",data)
     }      
     

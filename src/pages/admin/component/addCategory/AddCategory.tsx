@@ -34,9 +34,7 @@ export default function AddCategory() {
                 message.success("add category successe")
             })
             .catch(err => {
-                console.log("err", err);
                 message.error("add category failed")
-
             })
     }
     return (

@@ -23,7 +23,7 @@ export default function ListProduct() {
     const currentPage = Math.ceil(skipItem / takeItem)
     const navigate = useNavigate()
     useEffect(() => {
-        // const [skipItem, setSkipItem] = useState(0);
+
         apis.productApi.getAll(takeItem, skipItem)
             .then(res => {
                 if (res.status == 200) {
@@ -42,7 +42,7 @@ export default function ListProduct() {
     }, [])
     // statusPro[0], isProductUpdated[0]
 
-    console.log("products", products);
+    // console.log("products", products);
 
 
     function changePage(pageItemObj: any) {

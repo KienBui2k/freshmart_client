@@ -60,9 +60,7 @@ export default function AddProduct() {
             }
             await apis.productApi.create(formData)
                 .then(res =>
-                   {
-                    console.log("11111",res);
-                    
+                   {                 
                     dispatch(productAction.setNewProduct(res.data.data))
                     message.success(res.data.message)
                    }
@@ -72,7 +70,6 @@ export default function AddProduct() {
 
             // message.success(response.data.message);
         } catch (err) {
-            console.log("err", err);
             message.error("đã xảy ra lỗi trong quá trình add Product")
         }
     }

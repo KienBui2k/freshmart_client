@@ -6,7 +6,7 @@ import { configureStore, combineReducers} from '@reduxjs/toolkit';
 const RootReducer = combineReducers({
     userStore: userReducer,
     categoryStore:categoryReducer,
-    productSrore:productReducer
+    productStore:productReducer
 })
 
 export type StoreType = ReturnType<typeof RootReducer>;

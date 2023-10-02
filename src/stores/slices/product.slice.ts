@@ -26,7 +26,6 @@ const productSlice = createSlice({
             }
         },
         setNewProduct: (state, action) => {
-            console.log("action",action);
             return {
                 data: [...state.data, action.payload]
             }

@@ -183,7 +183,6 @@ export default function App(data: Data) {
                                 <MDBIcon fas icon="smile" />
                             </a>
                             <span onClick={() => {
-                                console.log("đã vào!")
                                 socketClient?.emit('onMessage', {
                                     socketId: socketClient?.id,
                                     userId: (userStore! as any).id,

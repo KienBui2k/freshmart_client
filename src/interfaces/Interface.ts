@@ -3,6 +3,7 @@
 export interface ProductOption {
     price: number;
     optionName: string;
+    id:number;
 }
 export interface Picture {
     image: File;
@@ -14,7 +15,8 @@ export interface Product {
     name: string;
     avatar: string;
     des: string;
+    categoryId: string;
     status: boolean;
     option: ProductOption[];
-    Picture:Picture[];
+    picture:Picture[];
 }

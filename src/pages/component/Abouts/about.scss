@@ -1,0 +1,175 @@
+.main_about_page {
+    width: 100%;
+    min-height: 800px;
+    background-color: white;
+    .why-choose-section {
+        padding: 7rem 0;
+        .section-title {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2f2f2f;
+            line-height: 1.2;
+        }
+        p {
+            margin-bottom: 8px;
+            line-height: 32px;
+            color: #6a6a6a;
+            font-size: 18px;
+        }
+        .img-wrap {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                width: 100%;
+                border-radius: 20px;
+            }
+        }
+    }
+    .feature {
+        margin-bottom: 30px;
+        .icon {
+            display: inline-block;
+            position: relative;
+            margin-bottom: 20px;
+
+            &:before {
+                content: "";
+                width: 33px;
+                height: 33px;
+                position: absolute;
+                background: rgba(59, 93, 80, 0.2);
+                border-radius: 50%;
+                right: -8px;
+                bottom: 0;
+            }
+        }
+
+        h3 {
+            font-size: 18px;
+            color: #2f2f2f;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 22px;
+            color: #6a6a6a;
+        }
+    }
+    .we_are_section {
+        width: 100%;
+        min-height: 300px;
+        display: flex;
+        flex-wrap: wrap;
+        .we_are_grit1 {
+            max-height: 100%;
+            padding: 0 16px;
+            h2 {
+                color: #1b1b1b;
+                font-variant-ligatures: common-ligatures;
+                margin-top: 0.3em;
+                margin-bottom: 21px;
+                line-height: 1.17;
+                font-size: 30px;
+                width: 140%;
+            }
+            p {
+                font-family: "Montserrat", sans-serif;
+                font-size: 16px;
+                line-height: 1.75;
+                letter-spacing: 0.5px;
+                color: #5f5c5c;
+                font-weight: 300;
+                margin-bottom: 8px;
+            }
+        }
+
+        .we_are_grit2 {
+            max-height: 100%;
+            padding: 0 16px;
+            margin-top: 60px;
+            p {
+                font-family: "Montserrat", sans-serif;
+                font-size: 16px;
+                line-height: 1.75;
+                letter-spacing: 0.5px;
+                color: #5f5c5c;
+                font-weight: 300;
+                margin-bottom: 8px;
+            }
+            .we_are_grit3 {
+                max-height: 100%;
+                padding: 0 16px;
+                // margin-top: 60px;
+                // background-color: red;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                img {
+                    display: block;
+                    max-width: 100%;
+                    height: auto;
+                }
+                p {
+                    margin-top: 12px;
+                    font-family: "Montserrat", sans-serif;
+                    font-size: 16px;
+                    line-height: 1.75;
+                    letter-spacing: 0.5px;
+                    color: #5f5c5c;
+                    font-weight: 300;
+                    margin-bottom: 8px;
+                }
+            }
+        }
+    }
+    .made_with_section {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 60px;
+        padding-bottom: 40px;
+        .made_with_grit1 {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                max-width: 90%;
+                width: 80%;
+            }
+        }
+        .made_with_grit2 {
+            width: 50%;
+            height: 100%;
+            margin: auto 0;
+            padding: 0 80px;
+       
+            .made_with_content {
+                width: 100%;
+                h2 {
+                    height: 100px;
+                    font-size: 36px;
+                    color: #1b1b1b;
+                    font-variant-ligatures: common-ligatures;
+                    margin-top: 0.236em;
+                    margin-bottom: 21px;
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                }
+                p {
+                    font-family: "Montserrat", sans-serif;
+                    font-size: 16px;
+                    line-height: 1.75;
+                    letter-spacing: 0.5px;
+                    color: #444;
+                    font-weight: 300;
+                    -webkit-font-smoothing: antialiased;
+                }
+            }
+        }
+    }
+}

@@ -22,46 +22,89 @@
                 border-radius: 8px;
             }
         }
+        i {
+            display: flex;
+            align-items: center;
+        }
     }
 }
+// .btn-close{
 
+//     position: relative;
+//     right: 200px;
+// }
 .search_body {
     width: 100%;
     max-width: 1410px;
     display: flex;
     margin: 0 auto;
-    .container_search {
+    .container_search_main {
         width: 100%;
-        max-width: 1410px;
-        margin: 0 auto;
+        max-width: 1440px;
         display: flex;
-        flex-wrap: wrap;
-        .search_item {
+        flex-direction: column;
+        .container_search {
+            width: 100%;
+            max-width: 1410px;
+            margin: 0 auto;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            // width: 23%;
-            height: 220px;
-            // padding: 0 15px;
-            margin-bottom: 12px;
-            .img_item_search {
-                height: 90%;
-                width: 100%;
+            flex-wrap: wrap;
+
+            .search_item {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                img {
-                    height: 100%;
+                flex-direction: column;
+                // width: 23%;
+                height: 220px;
+                // padding: 0 15px;
+                margin-bottom: 12px;
+
+                .img_item_search {
+                    height: 90%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img {
+                        height: 100%;
+                    }
+                }
+                .name_item_search {
+                    height: 10%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 8px 0;
                 }
             }
-            .name_item_search {
-                height: 10%;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 8px 0;
+        }
+        .product_footer {
+            height: 80px;
+            margin: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            height: 30px;
+            margin-top: 18px;
+            span {
+                margin: 0 12px;
+                cursor: pointer;
+                
+            }
+            svg {
+                margin: 0 4px;
+                font-size: 24px;
+            }
+            .item_page {
+                &.active {
+                    background-color: #6bc218;
+                    padding: 1px 8px;
+                    border-radius: 50%;
+                    color: white;
+                }
             }
         }
     }

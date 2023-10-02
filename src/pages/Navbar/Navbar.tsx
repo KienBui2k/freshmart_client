@@ -38,8 +38,6 @@ export default function Navbar() {
     ]);
 
 
-
-
     return (
         <div className="navbar_section">
             <div className="nav_content">
@@ -136,7 +134,7 @@ export default function Navbar() {
                                 </select>
                             </div>
                         </div>
-                        <div className="nav_hello">                           
+                        <div className="nav_hello">
                             <span>
                                 {userStore.data ? `hello ${userStore.data?.firstName} ${userStore.data?.lastName}` : "hello!"}
                             </span>
@@ -151,9 +149,14 @@ export default function Navbar() {
                                 <DropdownGues />
                             )}
                         </div>
-                        <div className="nav_cart_btn">
+                        <div className="nav_cart_btn"
+                            onClick={() => {
+                                navigate("/cart")
+                            }}>
                             <TiShoppingCart />
-                            <span>0</span>
+                            <span>{userStore.cart?.detail.reduce((value,cur) => {
+                                return value += cur.quantity
+                            },0)}</span>
                         </div>
                     </div>
                 </div>

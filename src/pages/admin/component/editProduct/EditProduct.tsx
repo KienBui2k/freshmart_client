@@ -8,7 +8,7 @@ import { Product } from "@/interfaces/Interface";
 export default function EditProduct(props: { id: string }) {
     const [product, setProduct] = useState<Product | undefined>(undefined);
     const dispatch = useDispatch();
-    const productStore = useSelector((store: StoreType) => store.productSrore);
+    const productStore = useSelector((store: StoreType) => store.productStore);
 
     useEffect(() => {
         // Tìm sản phẩm trong store với id tương ứng và cập nhật state

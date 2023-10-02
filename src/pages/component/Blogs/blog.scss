@@ -1,0 +1,19 @@
+
+.blog_container{
+    width: 90%;
+    margin: 30px auto;
+    .blog_item{
+        display: flex;
+        justify-content: space-between;
+        img{
+            width: 650px;
+            height: 400px;
+        }
+        .blog_item_content{
+            padding: 50px 60px;
+            h4{
+                margin-bottom: 25px;
+            }
+        }
+    }
+}

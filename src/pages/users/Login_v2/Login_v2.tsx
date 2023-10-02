@@ -6,6 +6,13 @@ import { message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userAction } from '@/stores/slices/user.slices';
+import { FcGoogle } from "react-icons/fc";
+import { googleLogin } from '@/firebase';
+import { User } from 'firebase/auth';
+
+interface UserGoogle extends User {
+    accessToken: string
+}
 function Login2() {
     const userStore = useSelector((store: StoreType) => {
         return store.userStore;
@@ -186,10 +193,7 @@ function Login2() {
                                     <div style={{ color: "red" }} className="error_message">Incorect Confirm Password.</div>
                                 )}
                             </div>
-                            <div className="checkbox">
-                                <input type="checkbox" id="signupCheck" />
-                                <label htmlFor="signupCheck">I accept all terms & conditions</label>
-                            </div>
+
                             <button type="submit" className='register'>Register</button>
                         </form>
                     </div>
@@ -216,6 +220,48 @@ function Login2() {
                                 <span onClick={() => {
                                     setHandleShowForm(false)
                                 }}>Forgot password?</span>
+                                <div className="checkbox"
+                                    onClick={async () => {
+                                        try {
+                                            await googleLogin()
+                                                .then(async (res) => {
+                                                    let data = {
+                                                        accessToken: (res.user as UserGoogle).accessToken,
+                                                        email: res.user.email,
+                                                        userName: res.user.email,
+                                                        password: res.user.uid
+                                                    }
+                                                    console.log("data", data)
+                                                    await apis.userApi.googleLogin(data)
+                                                        .then(res => {
+                                                            console.log("res", res);
+
+                                                            if (res.status == 200) {
+                                                                localStorage.setItem("token", res.data.token);
+                                                                dispatch(userAction.reload())
+                                                            }
+                                                        })
+                                                        .catch(err => {
+                                                            console.log("err", err);
+
+                                                            alert("Google Login Failed")
+                                                        })
+                                                })
+                                                .catch(err => {
+                                                    window.alert("Login Google Failed")
+                                                })
+
+                                        } catch (err) {
+                                            window.alert("Login Google Thất bại, thử lại!")
+                                        }
+                                    }}>
+                                    <span
+
+                                    >
+                                        <FcGoogle />
+                                    </span>
+                                    <label htmlFor="signupCheck">Sing up width Google</label>
+                                </div>
                                 <button type='submit' className='login'>Login</button>
                             </form>
                         </> : <>
@@ -238,6 +284,7 @@ function Login2() {
                                     )}
                                 </div>
                                 <button type='submit' className='login'>Reset Password</button>
+
                                 <span className='backToLogin' onClick={() => setHandleShowForm(true)}>Login pages</span>
                             </form>
                         </>}

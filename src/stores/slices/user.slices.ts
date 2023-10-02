@@ -1,3 +1,4 @@
+import { Product } from "@/interfaces/Interface";
 import { createSlice } from "@reduxjs/toolkit";
 import { Socket } from "socket.io-client";
 
@@ -50,7 +51,13 @@ export interface ReceiptDetail {
     optionId: string;
     quantity: number;
     receipt: Receipt;
-    option: any
+        option: {
+        id: string;
+        optionName: string;
+        productId: string;
+        product: Product;
+        price:number;
+    }
 }
 export interface Receipt {
     id: string;
@@ -64,7 +71,7 @@ export interface Receipt {
     accepted: string;
     shipAt: string;
     doneAt: string;
-    detail: ReceiptDetail
+    detail: ReceiptDetail[]
 }
 
 interface UserState {
@@ -73,6 +80,7 @@ interface UserState {
     socket: null | Socket;
     receipts: null | Receipt[];
     cart: null | Receipt;
+     cartPayQr: null | string;
 }
 
 const initialState: UserState = {
@@ -81,6 +89,7 @@ const initialState: UserState = {
     socket: null,
     receipts: null,
     cart: null,
+    cartPayQr: null
 };
 
 const userSlice = createSlice({
@@ -110,6 +119,12 @@ const userSlice = createSlice({
                 ...state,
                 cart: action.payload,
             };
+        },
+        setCartPayQr: function (state, action) {
+            return {
+                ...state,
+                cartPayQr: action.payload
+            }
         },
         reload: function (state) {
             return {

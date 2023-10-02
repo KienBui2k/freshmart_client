@@ -15,5 +15,16 @@ export default{
     },
     get: async function(){
         return await axios.get(import.meta.env.VITE_SV_HOST + `products`)
+    },
+    findByCategory: async function(id:string, takeItem:number, skipItem:number){
+        return await axios.get(import.meta.env.VITE_SV_HOST + `products/category/${id}?skip=${skipItem}&take=${takeItem}`)
+    },
+    search: async function(key:string,takeItem:number,skipItem:number){
+        console.log("key api",key);
+        
+        return await axios.get(import.meta.env.VITE_SV_HOST + `products?key=${key}&skip=${skipItem}&take=${takeItem}`)
+    },
+    newProduct: async function(takeItem:number){
+        return await axios.get(import.meta.env.VITE_SV_HOST +`products/newProducts?=take${takeItem}`) 
     }
 }
