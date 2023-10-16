@@ -7,12 +7,14 @@ import { StoreType } from "@/stores";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTranslation } from "react-i18next";
 
 
 export default function Banner() {
     useEffect(() => {
         AOS.init();
     }, []);
+    const { t } = useTranslation();
     const categoryStore = useSelector((store: StoreType) => store.categoryStore)
     const navigate = useNavigate();
     const slider = useRef(null);
@@ -112,37 +114,43 @@ export default function Banner() {
 
             <div className="main_category">
                 <div className="titel_category">
-                    <h2>Categories</h2>
+                    <h2>{t("categoty")}</h2>
                     <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quibusdam consectetur dolorem voluptates aspernatur quasi sit quia, quas temporibus. Tempora.</span>
                 </div>
                 <div className="container_category">
                     <div className="list_category">
                         {
-                            categoryStore.data?.map((category: any) => (
-                                <div key={category.id} className="itmem_category" 
-                                    data-aos="fade-left"
-                                    data-aos-anchor="#example-anchor"
-                                    data-aos-offset="600"
-                                    data-aos-duration="500"
+                            categoryStore.data
+                                ?.filter((category: any) => category.status === true)
+                                .map((category: any) => (
+                                    <div
+                                        key={category.id}
+                                        onClick={() => {
+                                            navigate(`/products/${category.id}`);
+                                        }}
+                                        className="itmem_category"
+                                        data-aos="fade-left"
+                                        data-aos-anchor="#example-anchor"
+                                        data-aos-offset="600"
+                                        data-aos-duration="500"
                                     >
-                                    <div
-                                        className="avatar_category">
-                                        <img src={category.avatar} alt="" />
+                                        <div className="avatar_category">
+                                            <img src={category.avatar} alt="" />
+                                        </div>
+                                        <div className="item_titel_category">
+                                            <span>{category.title}</span>
+                                        </div>
                                     </div>
-                                    <div
-                                        className="item_titel_category">
-                                        <span>{category.title}</span>
-                                    </div>
-                                </div>
-                            ))
+                                ))
                         }
                     </div>
+
                 </div>
             </div>
             <NewProduct />
-            <div className="whyChooseUs">
+            {/* <div className="whyChooseUs">
 
-            </div>
+            </div> */}
         </div>
     );
 }

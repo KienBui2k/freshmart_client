@@ -10,6 +10,7 @@ interface UserInfo {
     lastName: string;
     email: string;
     userName: string;
+    avatar: string;
 }
 export default function Profile() {
     const dispatch = useDispatch()
@@ -25,16 +26,17 @@ export default function Profile() {
         setActiveTab(tabName);
     };
     const [editPassword, setEditPassword] = useState(false)
-    useEffect(() => {
-        setEditPassword(userStore!.emailAuthentication);
-    }, [userStore])
+    // useEffect(() => {
+    //     setEditPassword(userStore.data?.emailAuthentication);
+    // }, [userStore.data])
 
 
     const initialUserInfo: UserInfo = {
-        firstName: userStore?.firstName || '',
-        lastName: userStore?.lastName || '',
-        email: userStore?.email || '',
-        userName: userStore?.userName || ''
+        firstName: userStore.data?.firstName || '',
+        lastName: userStore.data?.lastName || '',
+        email: userStore?.data?.email || '',
+        userName: userStore?.data?.userName || '',
+        avatar: userStore.data?.avatar || '',
     };
 
     const [userInfo, setUserInfo] = useState(initialUserInfo);
@@ -113,7 +115,7 @@ export default function Profile() {
                 <div className="profile_content">
                     <div className="profile_nav col-lg-4">
                         <div className="user_avatar">
-                            <img src="../images/test_avatar.jpg" alt="" />
+                            <img src={userInfo.avatar} alt="" />
                         </div>
                         <div className="user_name">
                             <h4>Bùi hải kiên</h4>
@@ -201,43 +203,42 @@ export default function Profile() {
                         {activeTab === 2 &&
                             <div className='my_password'>
                                 {/* {userStore?.emailAuthentication == true  ? <></> : <></>} */}
-                                {
-                                    editPassword ? <>
-                                        <div className="my_password_title">
-                                            <h3>Password Setting</h3>
-                                        </div>
-                                        <form
-                                            onSubmit={(e) => {
-                                                ChangePassword(e)
-                                            }}
-                                            className="my_password_content">
-                                            <div className="row1">
-                                                <span>Old Password</span>
-                                                <input name='oldPassword' type="password" placeholder='Old password' />
-                                                {!validConfirmPassword && (
-                                                    <div style={{ color: 'red' }}>*Please enter your old password correctly.</div>
-                                                )}
-                                            </div>
-                                            <div className="row2">
-                                                <span>New Password</span>
-                                                <input name='newPassword' type="password" placeholder='New password' />
-                                                {!validPassword && (
-                                                    <div style={{ color: "red" }} className="error_message">*Password must be at least 6 characters long.</div>
-                                                )}
-                                            </div>
-                                            <div className="row3">
-                                                <span>Confirm Password</span>
-                                                <input name='confirmPassword' type="password" placeholder='Confirm password' />
-                                                {validConfirmPW && (
-                                                    <div style={{ color: "red" }} className="error_message">*Incorect Confirm Password.</div>
-                                                )}
-                                            </div>
-                                            <div className='row4'>
-                                                <button type='submit' className='pw_update_btn'>Update</button>
-                                                <button type='button' className='pw_cancel_btn'>Cancel</button>
-                                            </div>
-                                        </form>
-                                    </> :
+
+                                <div className="my_password_title">
+                                    <h3>Password Setting</h3>
+                                </div>
+                                <form
+                                    onSubmit={(e) => {
+                                        ChangePassword(e)
+                                    }}
+                                    className="my_password_content">
+                                    <div className="row1">
+                                        <span>Old Password</span>
+                                        <input name='oldPassword' type="password" placeholder='Old password' />
+                                        {!validConfirmPassword && (
+                                            <div style={{ color: 'red' }}>*Please enter your old password correctly.</div>
+                                        )}
+                                    </div>
+                                    <div className="row2">
+                                        <span>New Password</span>
+                                        <input name='newPassword' type="password" placeholder='New password' />
+                                        {!validPassword && (
+                                            <div style={{ color: "red" }} className="error_message">*Password must be at least 6 characters long.</div>
+                                        )}
+                                    </div>
+                                    <div className="row3">
+                                        <span>Confirm Password</span>
+                                        <input name='confirmPassword' type="password" placeholder='Confirm password' />
+                                        {validConfirmPW && (
+                                            <div style={{ color: "red" }} className="error_message">*Incorect Confirm Password.</div>
+                                        )}
+                                    </div>
+                                    <div className='row4'>
+                                        <button type='submit' className='pw_update_btn'>Update</button>
+                                        <button type='button' className='pw_cancel_btn'>Cancel</button>
+                                    </div>
+                                </form>
+                                {/* </> :
                                         <>
                                             <div className='resend_email_conten'>
                                                 <span>Email của bạn chưa được xác thực, vui lòng xác thực email trước khi sử dụng tính năng này!</span>
@@ -246,7 +247,7 @@ export default function Profile() {
                                                 }} type='button'>Xác thực Email</button>
                                             </div>
                                         </>
-                                }
+                                } */}
                             </div>
                         }
 

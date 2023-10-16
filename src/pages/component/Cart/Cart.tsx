@@ -5,18 +5,26 @@ import CartDetail from "./cartDetail/CartDetail"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import RelativeProduct from "./relativeProduct/RelativeProduct"
-
+import CartOff from "./cartDetail/cartOff"
 
 export default function Cart() {
     const useStore = useSelector((store: StoreType) => {
         return store.userStore
     })
+    const guestCartStore = useSelector((store: StoreType) => {
+        return store.guestCartStore
+    })
+    interface newGuestReceipt {
+        email: string;
+        phoneNumber: string;
+        total: number;
+        payMode: string;
+    }
     const text = 'Are you sure to delete this task?';
     const description = 'Delete the task';
     const cart = useStore.cart?.detail;
-    const subTotal = cart?.reduce((total: number, item: any) => {
-        return total += item.quantity * item.option.price
-    }, 0)
+    const guestCart = guestCartStore.cart
+    const [subTotal, setSubTotal] = useState(0)
     const listId: any = []
     cart?.map(item => (
         listId.push(item.option.product.categoryId)
@@ -27,6 +35,19 @@ export default function Cart() {
     });
     const navigate = useNavigate()
 
+    useEffect(() => {
+        if (useStore.socket) {
+            const Total = cart?.reduce((total: number, item: any) => {
+                return total += item.quantity * item.option.price
+            }, 0)
+            setSubTotal(Total || 0);
+        } else {
+            const Total = guestCart?.reduce((total: number, item: any) => {
+                return total += item.quantity * item.option.price
+            }, 0)
+            setSubTotal(Total || 0);
+        }
+    }, [cart, guestCart, useStore.socket]);
     return (
 
         <div className="cart_section">
@@ -35,7 +56,7 @@ export default function Cart() {
             </div>
 
             <div className="cart_content">
-                {cart!.length > 0 ?
+                {cart?.length > 0 || guestCart?.length > 0 ?
                     <>
                         <div className="content_header">
                             <div className="Product_img itemPro"><span>Image</span> </div>
@@ -46,11 +67,15 @@ export default function Cart() {
                             <div className="Product_delete itemPro"><span>Delete</span> </div>
                         </div>
                         <div className="content_body">
+
                             {
-                                cart?.map(item => (
+                                useStore.socket ? (cart?.map(item => (
                                     <CartDetail key={Date.now() * Math.random()} item={item} />
-                                ))
+                                ))) : (guestCart?.map(item => (
+                                    <CartOff key={Date.now() * Math.random()} guestItem={item} />
+                                )))
                             }
+
                         </div>
                     </> :
 

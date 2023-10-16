@@ -40,7 +40,7 @@ export default function RelativeProduct() {
     return (
         <div className='multicarousel-container'>
             <div className="list_new_title">
-                <h2>Sản phẩm liên quan</h2>
+                <h2>Gợi ý cho bạn</h2>
             </div>
 
             <Carousel

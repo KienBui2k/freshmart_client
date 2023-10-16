@@ -49,7 +49,7 @@ export default function CartDetail(props: Props) {
             })
         }
     }
-
+ 
     return (
         <div className="cart_item">
             <div className="Product_img itemPro">

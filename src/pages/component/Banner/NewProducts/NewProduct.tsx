@@ -3,8 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import './newProduct..scss';
 import { useEffect, useState } from "react";
-// import apis from "@/services/apis";
-// import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Product } from "@/interfaces/Interface";
 import apis from "@/services/Apis";
@@ -19,7 +18,7 @@ import apis from "@/services/Apis";
 // }
 export default function NewProduct() {
     const navigate = useNavigate()
-    // const { t } = useTranslation();
+    const { t } = useTranslation();
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -50,7 +49,7 @@ export default function NewProduct() {
     return (
         <div className='multicarousel-container'>
             <div className="list_new_title">
-                <h2>Product</h2>
+                <h2>{t("newProduct")}</h2>
             </div>
 
             <Carousel
@@ -118,63 +117,6 @@ export default function NewProduct() {
                         }}>{item.name}</p>
                     </div>
                 ))}
-                <div className='product'>
-                    <img onClick={() => {
-                        navigate(`/product/1`)
-                    }} src="https://freshmart-vinovatheme.myshopify.com/cdn/shop/products/43_1120x.jpg?v=1586053712" alt="" />
-                    <p onClick={() => {
-                        navigate(`/product/1`)
-                    }}>Name Product</p>
-                </div>
-                <div className='product'>
-                    <img onClick={() => {
-                        navigate(`/product/1`)
-                    }} src="https://freshmart-vinovatheme.myshopify.com/cdn/shop/products/43_1120x.jpg?v=1586053712" alt="" />
-                    <p onClick={() => {
-                        navigate(`/product/1`)
-                    }}>Name Product</p>
-                </div>
-                <div className='product'>
-                    <img onClick={() => {
-                        navigate(`/product/1`)
-                    }} src="https://freshmart-vinovatheme.myshopify.com/cdn/shop/products/43_1120x.jpg?v=1586053712" alt="" />
-                    <p onClick={() => {
-                        navigate(`/product/1`)
-                    }}>Name Product</p>
-                </div>
-                <div className='product'>
-                    <img onClick={() => {
-                        navigate(`/product/1`)
-                    }} src="https://freshmart-vinovatheme.myshopify.com/cdn/shop/products/43_1120x.jpg?v=1586053712" alt="" />
-                    <p onClick={() => {
-                        navigate(`/product/1`)
-                    }}>Name Product</p>
-                </div>
-                <div className='product'>
-                    <img onClick={() => {
-                        navigate(`/product/1`)
-                    }} src="https://freshmart-vinovatheme.myshopify.com/cdn/shop/products/43_1120x.jpg?v=1586053712" alt="" />
-                    <p onClick={() => {
-                        navigate(`/product/1`)
-                    }}>Name Product</p>
-                </div>
-                <div className='product'>
-                    <img onClick={() => {
-                        navigate(`/product/1`)
-                    }} src="https://freshmart-vinovatheme.myshopify.com/cdn/shop/products/43_1120x.jpg?v=1586053712" alt="" />
-                    <p onClick={() => {
-                        navigate(`/product/1`)
-                    }}>Name Product</p>
-                </div>
-                <div className='product'>
-                    <img onClick={() => {
-                        navigate(`/product/1`)
-                    }} src="https://freshmart-vinovatheme.myshopify.com/cdn/shop/products/43_1120x.jpg?v=1586053712" alt="" />
-                    <p onClick={() => {
-                        navigate(`/product/1`)
-                    }}>Name Product</p>
-                </div>
-
             </Carousel>
         </div>
     )

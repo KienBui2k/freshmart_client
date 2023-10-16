@@ -43,18 +43,18 @@ const Sidebar = () => {
                     <h4>Receipt </h4>
                     <li
                         onClick={() => {
-                            navigate("/admin/list_receipt_gues");
+                            navigate("/admin/list_guest_recript");
                         }}>
                         <span className=""><BsListColumnsReverse /></span>
-                        <p>List Receipt Gues</p>
+                        <p>List Receipt </p>
                     </li>
-                    <li
+                    {/* <li
                         onClick={() => {
                             navigate("/admin/list_receipt_user");
                         }}>
                         <span className=""><BsListColumnsReverse /></span>
                         <p>List Receipt User</p>
-                    </li>
+                    </li> */}
                     <h4>User manage</h4>
                     <li onClick={() => {
                         navigate("/admin/list_user");

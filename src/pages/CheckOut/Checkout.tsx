@@ -1,59 +1,131 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import "./checkout.scss"
 import { StoreType } from "@/stores"
 import { useNavigate } from "react-router-dom"
-import { QRCode, message } from "antd"
-import { useEffect } from "react"
-
+import { Modal, QRCode, message } from "antd"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { guestCartActions } from "@/stores/slices/guestCart.slice"
+interface newInforReceipt {
+  email: string;
+  phoneNumber: string;
+  firstName: string;
+  lastName: string;
+  note: string;
+}
 export default function Checkout() {
+
   const useStore = useSelector((store: StoreType) => {
     return store.userStore
   })
   const cart = useStore.cart?.detail;
-  const subTotal = cart?.reduce((total: number, item: any) => {
-    return total += item.quantity * item.option.price
-  }, 0)
+  const guestCartStore = useSelector((store: StoreType) => {
+    return store.guestCartStore
+  })
+  console.log("guestCartStore", guestCartStore);
+  const [subTotal, setSubTotal] = useState(0)
+  // const subTotal = cart?.reduce((total: number, item: any) => {
+  //   return total += item.quantity * item.option.price
+  // }, 0)
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   });
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if (useStore.socket) {
+      const Total = cart?.reduce((total: number, item: any) => {
+        return total += item.quantity * item.option.price
+      }, 0)
+      setSubTotal(Total || 0);
+    } else {
+      const Total = guestCartStore?.cart?.reduce((total: number, item: any) => {
+        return total += item.quantity * item.option.price
+      }, 0)
+      setSubTotal(Total || 0);
+    }
+  }, [cart, guestCartStore?.cart, useStore.socket]);
 
   function checkout(e: React.FormEvent) {
     e.preventDefault()
-    if (cart!.length < 1) {
-        message.warning("Bạn chưa mua hàng, Không thể checkOut!")
+    let guest = {
+      name: ((e.target as any).firstName.value + (e.target as any).lastName.value),
+      numberPhone: (e.target as any).phone.value,
+      email: (e.target as any).email.value
+    }
+    let payMode = (e.target as any).payMode.value;
+    if (cart?.length < 1 || guestCartStore == undefined) {
+      message.warning("Bạn chưa mua hàng, Không thể checkOut!")
     } else {
-      let payMode = (e.target as any).payMode.value;
-      // useStore.socket?.emit("payCash", {
-      //   receiptId: useStore.cart?.id,
-      //   userId: useStore.data?.id
-      // })
-      if (payMode == "CASH") {
-        useStore.socket?.emit("payCash", {
-          receiptId: useStore.cart?.id,
-          total: subTotal,
-          userId: useStore.data?.id
-        })
+
+      if (useStore.socket) {
+        if (payMode == "CASH") {
+          useStore.socket?.emit("payCash", {
+            receiptId: useStore.cart?.id,
+            total: subTotal,
+            userId: useStore.data?.id
+          })
+        }
+        if (payMode == "ZALO") {
+          useStore.socket?.emit("payZalo", {
+            receiptId: useStore.cart?.id,
+            total: subTotal,
+            userId: useStore.data?.id
+          })
+        }
       }
-      if (payMode == "ZALO") {
-        useStore.socket?.emit("payZalo", {
-          receiptId: useStore.cart?.id,
-          total: subTotal,
-          userId: useStore.data?.id
+      else {
+        console.log("payMode", payMode)
+        console.log("guest", guest)
+
+        let carFormat = guestCartStore.cart?.map((item) => {
+          return {
+            optionId: item.option.id,
+            quantity: item.quantity
+          }
         })
+
+        let body = {
+          guest,
+          receiptDetails: carFormat,
+          payMode,
+          total: guestCartStore.cart?.reduce((total, item) => {
+            return total + item.quantity * item.option.price
+          }, 0)
+        }
+
+        axios.post("http://127.0.0.1:3000/apis/v1/guest", body)
+          .then((res) => {
+            if (res.status == 200) {
+              Modal.success({
+                title: "Thanh toán thành công, hóa đơn đã gửi đến email của bạn",
+                content: "bạn có thể bấm ok để qua trang kiểm tra lịch sử mua hàng",
+                onOk: () => {
+                  dispatch(guestCartActions.setCart([]))
+                  localStorage.setItem("cart", "[]")
+                  navigate("/thanks")
+                }
+
+              })
+            } else {
+              message.error("thanh toán thất bại")
+            }
+          })
+          .catch(err => {
+            message.error("quá trình thanh toán bị lỗi vui lòng thử lại sau")
+          })
       }
     }
 
   }
 
+
   return (
     <div className="checkout_section">
       <div className="header_checkOut_section ">
-
         <h2>Check Out</h2>
-
       </div>
       {
         useStore.cartPayQr && <QRCode value={useStore.cartPayQr} icon='https://cafebiz.cafebizcdn.vn/thumb_w/600/162123310254002176/2022/7/9/photo1657324993775-1657324993859181735127.jpg' />
@@ -132,11 +204,9 @@ export default function Checkout() {
                 <label htmlFor="c_order_notes" className="text-black">
                   Order Notes
                 </label>
-                <textarea
-                  name="c_order_notes"
+                <input
+                  name="note"
                   id="c_order_notes"
-                  cols={30}
-                  rows={5}
                   className="form-control"
                   placeholder="Write your notes here..."
                   defaultValue={""}
@@ -158,20 +228,18 @@ export default function Checkout() {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {cart.map((item : any) => (
-                    <tr key={Date.now() * Math.random()}>
-                      <td>{item.productDetail.name} <strong className="mx-2">x</strong> {item.quantity}</td>
-                      <td>{item.productDetail.price * item.quantity}</td>
-                    </tr>
-                  ))} */}
                   {
-                    useStore.cart?.detail?.map(item => (
+                    useStore.socket ? useStore.cart?.detail?.map(item => (
                       <tr key={Date.now() * Math.random()}>
                         <td>{`${item.option.product.name} ${" : "} [${item.option.optionName}]`} <strong className="mx-2">x</strong> {item.quantity}</td>
                         <td>{item.option.price * item.quantity}</td>
                       </tr>
-                    ))
-                  }
+                    )) : guestCartStore.cart.map(item => (
+                      <tr key={Date.now() * Math.random()}>
+                        <td>{`${item.option.product.name} ${" : "} [${item.option.name}]`} <strong className="mx-2">x</strong> {item.quantity}</td>
+                        <td>{item.option.price * item.quantity}</td>
+                      </tr>
+                    ))}
                   <tr>
                     <td className="text-black font-weight-bold">
                       <strong>Cart Subtotal</strong>
@@ -227,3 +295,4 @@ export default function Checkout() {
     </div>
   )
 }
+

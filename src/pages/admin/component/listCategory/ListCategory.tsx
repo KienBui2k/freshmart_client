@@ -70,13 +70,17 @@ export default function ListCategory() {
                             <div className="category_active item_header_admin">
                                 <button
                                     // onClick={() => toggleActiveState(category.id)}
-                                    className={`active-button ${category.active ? "active" : ""}`}
+                                    className={`active-button ${category.status ? "active" : ""}`}
                                 >
-                                    {category.active ? "ON" : "OFF"}
+                                    {category.status ? "ON" : "OFF"}
                                 </button>
                             </div>
                             <div className="category_option item_header_admin">
-                                <span>Edit</span>
+                                <span
+                                    onClick={() => {
+                                        navigate(`/admin/edit_category/${category.id}`)
+                                    }}
+                                >Edit</span>
                             </div>
                         </div>
                     ))}

@@ -7,8 +7,9 @@ import { CiUser } from "react-icons/ci";
 // import { StoreType } from "@/stores";
 import { BiUser } from "react-icons/bi";
 import { Modal } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StoreType } from "@/stores";
+import { userAction } from "@/stores/slices/user.slices";
 
 
 export default function DropdownLogout() {
@@ -16,23 +17,29 @@ export default function DropdownLogout() {
     const navigate = useNavigate();
     const userStore = useSelector((store: StoreType) => store.userStore)
     const [isAdmin, setIsAdmin] = useState(false);
+    const dispatch = useDispatch()
     const handleLogout = () => {
         if (window.confirm("Log_out_confirm")) {
             localStorage.removeItem("token");
             userStore.socket?.disconnect()
-            // navigate("/");
+            dispatch(userAction.setCart(null))
+            dispatch(userAction.setReceipt(null))
+            dispatch(userAction.setData(null))
+            dispatch(userAction.setSocket(null))
+            navigate("/");
+        }
+
+    };
+    const checkAdmin = () => {
+        if (userStore.data?.role == "ADMIN") {
+            setIsAdmin(!isAdmin);
         }
     };
-    // const checkAdmin = () => {
-    //     if (store.useStore.data?.isAdmin) {
-    //         setIsAdmin(!isAdmin);
-    //     }
-    // };
-    // const userStore = useSelector((store: StoreType) => store.useStore);
-    // useEffect(() => {
-    //     checkAdmin();
-    // }, [store]);
-    
+
+    useEffect(() => {
+        checkAdmin();
+    }, [userStore.data]);
+
     return (
         <div className="dropdown_user">
             <button
@@ -57,17 +64,11 @@ export default function DropdownLogout() {
                             Admin Page
                         </Link>
                     ) : (
-                        // <Link className="dropdown-item" to="/checkOrder">
-                        //     My order
-                        // </Link>
-                        <></>
+                        <Link className="dropdown-item" to="/receipts">
+                            My order
+                        </Link>
+
                     )}
-                </li>
-                <li>
-                    <a
-                        className="dropdown-item" >
-                        My order
-                    </a>
                 </li>
                 <li>
                     <a

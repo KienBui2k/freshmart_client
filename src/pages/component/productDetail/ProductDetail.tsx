@@ -2,10 +2,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./product_detail.scss"
 import { Product } from "@/interfaces/Interface";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StoreType } from "@/stores";
 import { ReceiptDetail } from "@/stores/slices/user.slices";
 import { message } from "antd";
+import { guestCartActions } from "@/stores/slices/guestCart.slice";
 
 export default function ProductDetail() {
     const [product, setProduct] = useState<Product>()
@@ -18,6 +19,7 @@ export default function ProductDetail() {
     const userStore = useSelector((store: StoreType) => store.userStore)
     const [selectedImage, setSelectedImage] = useState("");
     const [productAvatar, setProductAvatar] = useState("");
+    const dispatch = useDispatch()
     const handleImageClick = (smallImgSrc: string) => {
         setSelectedImage(smallImgSrc);
     };
@@ -34,32 +36,78 @@ export default function ProductDetail() {
         setSelectedOption(index);
     }
 
+    // const addToCart = () => {
+    //     const cart = userStore.cart?.detail;
+    //     if (cart) {           
+    //         const foundItem = cart.find((item: any) => (item.optionId == product?.option[selectedOption].id))
+    //         if (foundItem) {               
+    //             const totalQuantity = foundItem.quantity + quantity
+    //             if (userStore.socket) {
+    //                 userStore.socket.emit('addToCart', {
+    //                     receiptId: userStore.cart?.id,
+    //                     optionId: product?.option[selectedOption].id,
+    //                     quantity: totalQuantity
+    //                 })
+    //             }
+    //             message.success("Add To Cart Successfully!");
+    //         } else {
+    //             if (userStore.socket) {
+    //                 userStore.socket.emit('addToCart', {
+    //                     receiptId: userStore.cart?.id,
+    //                     optionId: product?.option[selectedOption].id,
+    //                     quantity: quantity,
+    //                 })
+    //             }
+    //             message.success("Add To Cart Successfully!");
+    //         }
+    //     }
+    // }
     const addToCart = () => {
-        const cart = userStore.cart?.detail;
 
-        if (cart) {
-            const foundItem = cart.find((item: any) => (item.optionId == product?.option[selectedOption].id))
-            if (foundItem) {
-                const totalQuantity = foundItem.quantity + quantity
+            const foundItem = userStore.cart?.detail.find((item: any) => (item.optionId == product?.option[selectedOption].id))
+         
                 if (userStore.socket) {
                     userStore.socket.emit('addToCart', {
                         receiptId: userStore.cart?.id,
                         optionId: product?.option[selectedOption].id,
-                        quantity: totalQuantity
+                        quantity: foundItem ? foundItem.quantity + quantity : quantity
                     })
+                    message.success("Add To Cart Successfully!");
+                }else{
+                    let cart = JSON.parse(localStorage.getItem("cart") ?? "[]")
+                    let findResult = cart.find((item: any) => item.option.id === product?.option[selectedOption].id)
+                    if (findResult) {
+                        findResult.quantity += quantity
+                        localStorage.setItem("cart", JSON.stringify(cart))
+                    } else {
+                        cart.push({
+                            option: {
+                                ...product?.option[selectedOption],
+                                product: {
+                                    name: product?.name,
+                                    price: product?.option[selectedOption]?.price
+                                }
+                            },
+                            quantity: quantity,
+                        })
+                        localStorage.setItem("cart", JSON.stringify(cart))
+                        console.log("cart",cart);
+                        
+                    }
+                    dispatch(guestCartActions.setCart(cart))
                 }
-                message.success("Add To Cart Successfully!");
-            } else {
-                if (userStore.socket) {
-                    userStore.socket.emit('addToCart', {
-                        receiptId: userStore.cart?.id,
-                        optionId: product?.option[selectedOption].id,
-                        quantity: quantity,
-                    })
-                }
-                message.success("Add To Cart Successfully!");
-            }
-        }
+                
+            //  else {
+            //     if (userStore.socket) {
+            //         userStore.socket.emit('addToCart', {
+            //             receiptId: userStore.cart?.id,
+            //             optionId: product?.option[selectedOption].id,
+            //             quantity: quantity,
+            //         })
+            //     }
+            //     message.success("Add To Cart Successfully!");
+            // }
+        
     }
     return (
         <div className="productDetail_section">

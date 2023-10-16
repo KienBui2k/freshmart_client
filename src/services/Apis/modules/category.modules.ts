@@ -9,5 +9,8 @@ export default{
                 "Content-Type": "multipart/form-data"
             }
         })
+    },
+    update: async function(id: string, data:any) {
+        return await axios.patch(import.meta.env.VITE_SV_HOST + `categories/${id}`,data)
     }
 }

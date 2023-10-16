@@ -4,6 +4,7 @@ export interface ProductOption {
     price: number;
     optionName: string;
     id:number;
+    status:boolean
 }
 export interface Picture {
     image: File;

@@ -1,0 +1,146 @@
+.edit_page_section {
+    width: 80%;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    .page_header {
+        width: 100%;
+        height: 160px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h2 {
+            font-size: 40px;
+        }
+    }
+    .product {
+        width: 100%;
+        height: 700px;
+        // background-color: rgba(205, 198, 198, 0.3);
+        display: flex;
+        .avatar_product {
+            width: 40%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                width: 70%;
+                border-radius: 6%;
+            }
+        }
+        .info_product {
+            height: 80%;
+            width: 60%;
+            margin-right: 40px;
+            padding-left: 40px;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid rgb(128, 119, 119);
+            border-radius: 12px;
+            .row1 {
+                height: 100px;
+                width: 100%;
+                display: flex;
+                span {
+                    height: 100%;
+                    width: 50%;
+                    display: flex;
+                    align-items: center;
+                    margin-left: 40px;
+                    font-size: 28px;
+                }
+            }
+            .row2 {
+                height: 40px;
+                width: 80%;
+                display: flex;
+                // justify-content: center;
+                align-items: center;
+                gap: 20px;
+                select {
+                    border: 1px solid rgb(128, 119, 119);
+                    width: 30%;
+                }
+                span {
+                    width: 20%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+            .row3 {
+                display: flex;
+                width: 100%;
+                height: 120px;
+                flex-direction: column;
+                justify-content: space-between;
+                margin-top: 40px;
+                .product_name {
+                    height: 50%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    span {
+                        width: 15%;
+                        height: 70%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    input {
+                        width: 75%;
+                        height: 70%;
+                        margin-left: 26px;
+                        border: 1px solid rgb(128, 119, 119);
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                    }
+                }
+                .product_des {
+                    height: 50%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    span {
+                        width: 15%;
+                        height: 70%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    input {
+                        width: 75%;
+                        height: 70%;
+                        margin-left: 26px;
+                        border: 1px solid rgb(128, 119, 119);
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                    }
+                }
+            }
+            .row4 {
+                display: flex;
+                width: 18%;
+                height: 60px;
+                justify-content:center;
+                align-items: center;
+                margin-top: 40px;
+                span{
+                    font-size: 24px;
+                    font-weight: 500;
+                    background-color: #6bc218;
+                    width: 70%;
+                    height: 90%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    border-radius: 26px;
+                }
+            }
+        }
+    }
+}

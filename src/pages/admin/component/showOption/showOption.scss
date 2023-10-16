@@ -1,0 +1,137 @@
+.edit_page_section {
+    width: 80%;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    .page_header {
+        width: 100%;
+        height: 160px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // background-color: rgba(205, 198, 198, 0.3);
+        h2 {
+            font-size: 40px;
+        }
+    }
+    .product {
+        width: 100%;
+        // height: 700px;
+        // background-color: rgba(205, 198, 198, 0.3);
+        display: flex;
+        padding: 0 40px;
+        .avatar_product {
+            width: 20%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            .item_picture {
+                width: 140px;
+                height: 140px;
+                margin-top: 32px;
+
+                img {
+                    width: 100%;
+                    border-radius: 50%;
+                }
+            }
+        }
+        .info_option {
+            height: 80%;
+            width: 60%;
+            margin: 0 40px;
+            padding-left: 40px;
+            display: flex;
+            flex-direction: column;
+
+            .row1 {
+                height: 100px;
+                width: 100%;
+                display: flex;
+                span {
+                    height: 100%;
+                    width: 50%;
+                    display: flex;
+                    align-items: center;
+                    margin-left: 40px;
+                    font-size: 28px;
+                }
+            }
+            .row2 {
+                height: 120px;
+                width: 100%;
+                border: 2px solid rgb(128, 119, 119);
+                border-radius: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+                .col1 {
+                    height: 100%;
+                    width: 80%;
+                    display: flex;
+                    flex-direction: column;
+                    .option_status {
+                        height: 50%;
+                        width: 100%;
+
+                        display: flex;
+                        // justify-content: center;
+                        align-items: center;
+                        gap: 20px;
+                        select {
+                            border: 1px solid rgb(128, 119, 119);
+                            width: 60%;
+                        }
+                        span {
+                            width: 31%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+                    .option_name {
+                        height: 50%;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        span {
+                            width: 30%;
+                            height: 70%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                        input {
+                            width: 60%;
+                            height: 70%;
+                            margin-left: 26px;
+                            border: 1px solid rgb(128, 119, 119);
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                        }
+                    }
+                }
+                .col2 {
+                    height: 100%;
+                    width: 20%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    span {
+                        padding: 4px 12px;
+                        background-color: #6bc218;
+                        color: white;
+                        font-size: 20px;
+                        border-radius: 14px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

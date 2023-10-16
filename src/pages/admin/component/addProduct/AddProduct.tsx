@@ -5,16 +5,16 @@ import { FormEvent, MutableRefObject, useRef, useState } from "react";
 import { Popconfirm, message } from "antd";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import apis from "@/services/Apis";
-import { ProductOption, Picture } from "@/interfaces/Interface";
+import { Picture } from "@/interfaces/Interface";
 import { productAction } from "@/stores/slices/product.slice";
 interface Category {
     id: string;
     title: string;
 }
-// interface ProductOption {
-//     price: number;
-//     optionName: string;
-// }
+interface ProductOption {
+    price: number;
+    optionName: string;
+}
 // interface Picture {
 //     image: File;
 //     url: string;
@@ -26,6 +26,7 @@ export default function AddProduct() {
     const imgPreviewRef: MutableRefObject<HTMLImageElement | null> = useRef(null);
     const [pictures, setPictures] = useState<Picture[]>([]);
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
 
     function addProductOption() {
@@ -45,6 +46,7 @@ export default function AddProduct() {
     }
     async function addNewProduct(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setLoading(true);
         try {
             let formData = new FormData();
             formData.append("product", JSON.stringify({
@@ -59,13 +61,14 @@ export default function AddProduct() {
                 formData.append("imgs", pictures[i].image)
             }
             await apis.productApi.create(formData)
-                .then(res =>
-                   {                 
+                .then(res => {
+                    setLoading(false)
                     dispatch(productAction.setNewProduct(res.data.data))
                     message.success(res.data.message)
-                   }
+
+                }
                 )
-                .catch(err => console.log("err", err)
+                .catch(err => setLoading(false)
                 )
 
             // message.success(response.data.message);
@@ -88,8 +91,8 @@ export default function AddProduct() {
                                 <select name="categoryId">
                                     {
                                         categoryStore.data?.map((category: Category) =>
-                                            
-                                        
+
+
                                             <option key={Math.random() * Date.now()} value={category.id}>{category.title}</option>
                                         )
                                     }
@@ -192,7 +195,8 @@ export default function AddProduct() {
                                 ))}
                             </div>
                         </div>
-                        <div className="save_btn"> <button type="submit">Save</button>
+                        <div className="save_btn"> <button type="submit">{loading ? <span className='loading-spinner'></span> : "Save"}</button>
+                            {/* <button className='button'>{loading ? <span className='loading-spinner'></span> : "Sign Up"}</button> */}
                         </div>
                     </div>
 

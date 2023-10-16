@@ -82,18 +82,22 @@ export default function Products() {
                             ) : null
                         ))} */}
                         <div className="overflow">
-                            {categoryStore.data?.map((item: any) => (
-                                <div
-                                    onClick={() => {
-                                        navigate(
-                                            `/products/${item.id}`
-                                        );
-                                    }}
-                                    key={item.id}
-                                    className="link_category_item">
-                                    <span>{item.title}</span><BsArrowRight />
-                                </div>
-                            ))}
+                            {
+                                categoryStore.data
+                                    ?.filter((category: any) => category.status === true)
+                                    .map((category: any) => (
+                                        <div
+                                            onClick={() => {
+                                                navigate(
+                                                    `/products/${category.id}`
+                                                );
+                                            }}
+                                            key={category.id}
+                                            className="link_category_item">
+                                            <span>{category.title}</span><BsArrowRight />
+                                        </div>
+                                    ))
+                            }
                         </div>
 
                     </div>
@@ -105,14 +109,14 @@ export default function Products() {
                                 <div className="product_img">
                                     <img onClick={() => {
                                         navigate(`/product/${product.id}`)
-                                    }} src={product.avatar} alt=""/>
+                                    }} src={product.avatar} alt="" />
                                     <div className="overlay">
                                         {/* <span onClick={() => {
                                         // handleAddToCart(product.id)
                                     }}><BsCartPlus /></span>  */}
-                                    <span onClick={() => {
-                                        navigate(`/product/${product.id}`)
-                                    }}><TbListDetails /></span></div>
+                                        <span onClick={() => {
+                                            navigate(`/product/${product.id}`)
+                                        }}><TbListDetails /></span></div>
                                 </div>
                                 <div className="product_info">
                                     <span onClick={() => {

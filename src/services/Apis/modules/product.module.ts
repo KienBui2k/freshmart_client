@@ -26,5 +26,11 @@ export default{
     },
     newProduct: async function(takeItem:number){
         return await axios.get(import.meta.env.VITE_SV_HOST +`products/newProducts?=take${takeItem}`) 
+    },
+    updateProduct: async function (id:string,data:any) {
+        return await axios.patch(import.meta.env.VITE_SV_HOST +`products/${id}` , data)
+    },
+        updateOption: async function (id:string,data:any) {
+        return await axios.patch(import.meta.env.VITE_SV_HOST +`options/${id}` , data)
     }
 }

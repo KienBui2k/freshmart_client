@@ -27,6 +27,9 @@ export default {
     authentication:async function (data:any){
       
         return await axios.post(import.meta.env.VITE_SV_HOST +"authentication",data)
-    }      
+    }  ,
+    updateProfile:async (newInfor: any) => {
+        return await axios.post(import.meta.env.VITE_SV_HOST + "users/updateProfile", newInfor)
+     },    
     
 }

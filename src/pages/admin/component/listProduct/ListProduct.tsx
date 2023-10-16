@@ -17,7 +17,7 @@ interface Product {
 
 export default function ListProduct() {
     const [products, setProducts] = useState<Product[]>([]);
-    const [takeItem, setTakeItem] = useState(2);
+    const [takeItem, setTakeItem] = useState(6);
     const [skipItem, setSkipItem] = useState(0);
     const [maxPage, setMaxPage] = useState<any[]>([]);
     const currentPage = Math.ceil(skipItem / takeItem)
@@ -105,7 +105,7 @@ export default function ListProduct() {
 
                 <div className="content_list_product">
                     {products.map((product, index) => (
-                        <div className="product_item_admin">
+                        <div key={product.id} className="product_item_admin">
                             <div className="product_stt item_header_admin">
                                 <span>{index + 1 + skipItem}</span>
                             </div>
@@ -130,10 +130,18 @@ export default function ListProduct() {
                                 </span>
                             </div>
                             <div className="option_show item_header_admin">
-                                <span>Show</span>
+                                <span
+                                    onClick={() => {
+                                        navigate(`/admin/show_option/${product.id}`)
+                                    }}
+                                >Show</span>
                             </div>
                             <div className="product_option item_header_admin">
-                                <span className="edit_btn">
+                                <span className="edit_btn"
+                                    onClick={() => {
+                                        navigate(`/admin/edit_product/${product.id}`)
+                                    }}
+                                >
                                     Edit
                                 </span>
                             </div>

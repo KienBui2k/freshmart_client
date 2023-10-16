@@ -9,8 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { ProductOption } from "@/interfaces/Interface";
 import { useSelector } from "react-redux";
 import { StoreType } from "@/stores";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
+
     const navigate = useNavigate();
     const categoryStore = useSelector((store: StoreType) => store.categoryStore)
     const userStore = useSelector((store: StoreType) => store.userStore)
@@ -36,8 +38,10 @@ export default function Navbar() {
             language: "en",
         },
     ]);
-
-
+    const guestCartStore = useSelector((store: StoreType) => {
+        return store.guestCartStore
+    })
+    const { t } = useTranslation();
     return (
         <div className="navbar_section">
             <div className="nav_content">
@@ -50,7 +54,7 @@ export default function Navbar() {
                             navigate("/")
                         }}
                         className="nav_item">
-                        <span>HOME</span>
+                        <span>{t("home")}</span>
                     </div>
                     <div className="nav_item">
                         <Dropdown>
@@ -66,20 +70,21 @@ export default function Navbar() {
 
                                 }}
                             >
-                                Shope
+                                SHOP
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                {categoryStore.data?.map((item: any) => (
-                                    <Dropdown.Item key={item.id}
-                                        onClick={() => {
-                                            navigate(
-                                                `/products/${item.id}`
-                                            );
-                                        }}
-                                    >
-                                        {item.title}
-                                    </Dropdown.Item>))}
-
+                                {categoryStore.data
+                                    ?.filter((item: any) => item.status === true)
+                                    .map((item: any) => (
+                                        <Dropdown.Item
+                                            key={item.id}
+                                            onClick={() => {
+                                                navigate(`/products/${item.id}`);
+                                            }}
+                                        >
+                                            {item.title}
+                                        </Dropdown.Item>
+                                    ))}
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
@@ -88,19 +93,19 @@ export default function Navbar() {
                             navigate("/contact")
                         }}
                         className="nav_item">
-                        <span>CONTACT</span>
+                        <span>{t("contacts")}</span>
                     </div>
                     <div
                         onClick={() => {
                             navigate("/about")
                         }} className="nav_item">
-                        <span>About</span>
+                        <span>{t("about")}</span>
                     </div>
                     <div
                         onClick={() => {
                             navigate("/blog")
                         }} className="nav_item">
-                        <span>BLOG</span>
+                        <span>{t("blog")}</span>
                     </div>
                 </div>
                 <div className="nav_right">
@@ -136,7 +141,9 @@ export default function Navbar() {
                         </div>
                         <div className="nav_hello">
                             <span>
-                                {userStore.data ? `hello ${userStore.data?.firstName} ${userStore.data?.lastName}` : "hello!"}
+                                {userStore.data ?
+                                    (userStore.data.firstName ? (`hello ${userStore.data?.firstName} ${userStore.data?.lastName}`) : (`hello ${userStore.data?.email}`)
+                                    ) : ("hello!")}
                             </span>
                         </div>
                     </div>
@@ -154,9 +161,22 @@ export default function Navbar() {
                                 navigate("/cart")
                             }}>
                             <TiShoppingCart />
-                            <span>{userStore.cart?.detail.reduce((value,cur) => {
+
+
+
+                            {/* <span>{userStore.cart?.detail.reduce((value,cur) => {
                                 return value += cur.quantity
-                            },0)}</span>
+                            },0)}
+
+                            </span> */}
+                            {
+                                userStore.socket ? <span>{userStore.cart?.detail.reduce((value, cur) => {
+                                    return value += cur.quantity
+                                }, 0)}</span>
+                                    : <span>{guestCartStore.cart?.reduce((value, cur) => {
+                                        return value + cur.quantity
+                                    }, 0)}</span>
+                            }
                         </div>
                     </div>
                 </div>
