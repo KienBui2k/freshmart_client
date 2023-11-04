@@ -31,7 +31,7 @@ function App() {
         }
       })
       .catch(err => console.log("err", err)
-      )
+      ) 
   }, [])
 
   return (
@@ -48,7 +48,7 @@ function App() {
             })
           }} style={{ position: "fixed", right: "50px", bottom: "50px" }}>Open Chat</button>
           : <div style={{ width: "400px", position: "fixed", right: 0, bottom: 0 }}>
-            <ChatBox open={openChat} />
+            <ChatBox open={openChat} setOpenChat={undefined} />
           </div>
       }
     </>

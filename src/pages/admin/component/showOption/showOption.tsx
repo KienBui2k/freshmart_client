@@ -15,7 +15,7 @@ interface ProductOption {
     status: boolean
 }
 interface Picture {
-    image: File;
+    image: string;
     url: string;
 }
 interface Product {
@@ -51,27 +51,6 @@ export default function EditOption() {
     if (!product) {
         return <div>Loading...</div>;
     }
-    // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, optionId: string) => {
-
-    //     if ((e.target.value == "true") || (e.target.value == "false")){
-    //         console.log(" Boolean(e.target.value)", typeof (Boolean(e.target.value)));
-
-
-    //     }
-
-    //     const updatedOptionsData = optionsData.map((option) => {
-    //         if (option.id === optionId) {
-    //             return {
-    //                 ...option,
-    //                 [e.target.name]: e.target.value,
-    //             };
-    //         }
-    //         return option;
-    //     });
-
-    //     setOptionsData(updatedOptionsData);
-
-    // }
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, optionId: string) => {
         const inputName = e.target.name;
         const inputValue = e.target.value;
@@ -125,6 +104,7 @@ export default function EditOption() {
             // Tiếp theo, bạn có thể xử lý lưu thông tin của option tại đây
         }
     }
+    
     return (
         <div className="edit_page_section">
             <div className="page_header">
