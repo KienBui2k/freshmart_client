@@ -19,7 +19,7 @@ export default function Home() {
     const productStore = useSelector((store: StoreType) => {
         return store.productStore
     })
-    const [subTotal, setTotal] = useState(0)
+    // const [subTotal, setTotal] = useState(0)
     // const subTotal = userStore.cart?.detail?.reduce((total: number, item: any) => {
     //     return total += item.quantity * item.option.price
     // }, 0)
@@ -31,15 +31,15 @@ export default function Home() {
             return total += item.quantity * item.option.price
         }, 0)
         console.log("total", total)
-        setTotal(
-            total ?? 0
-        )
+        // setTotal(
+        //     total ?? 0
+        // )
     }, [userStore.cart])
 
     useEffect(() => {
         if (!userStore.data) {
             let token = localStorage.getItem("token");
-            if (token) {
+            if (token) {    
                 let socket: Socket = io("http://localhost:3001", {
                     query: {
                         token

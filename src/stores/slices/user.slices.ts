@@ -119,7 +119,7 @@ const userSlice = createSlice({
                 ...state,
                 cart: action.payload,
             };
-        },
+        },  
         setCartPayQr: function (state, action) {
             return {
                 ...state,

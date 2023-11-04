@@ -1,10 +1,7 @@
-import { useDispatch, useSelector, useStore } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import RouterSetup from './routers/Router'
-import { StoreType, store } from './stores'
 import apis from './services/Apis'
 import { useEffect, useState } from 'react'
-import { Receipt, User, userAction } from './stores/slices/user.slices'
-import axios from 'axios'
 import ChatBox from "./pages/component/Chatbox/Chatbox"
 import "./main.scss"
 import { Modal } from 'antd'

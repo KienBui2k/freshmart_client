@@ -2,7 +2,6 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import "./main.scss"
-import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './stores/index.ts'
 /* i18n */

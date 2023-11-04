@@ -4,9 +4,8 @@ import { useState } from "react";
 import Search from "../component/Search/Search";
 import DropdownUser from "../component/Dropdown/DropdownUser/DropdownUser";
 import DropdownGues from "../component/Dropdown/DropdownGues/DropdownGues"
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Dropdown, } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { ProductOption } from "@/interfaces/Interface";
 import { useSelector } from "react-redux";
 import { StoreType } from "@/stores";
 import { useTranslation } from "react-i18next";
@@ -16,7 +15,7 @@ export default function Navbar() {
     const navigate = useNavigate();
     const categoryStore = useSelector((store: StoreType) => store.categoryStore)
     const userStore = useSelector((store: StoreType) => store.userStore)
-    const isLogin = localStorage.getItem("token") || null;
+    // const isLogin = localStorage.getItem("token") || null;
     /* Language setup */
     let LG_local = localStorage.getItem("locales");
     const [selectedLanguage, setSelectedLanguage] = useState(
@@ -38,6 +37,7 @@ export default function Navbar() {
             language: "en",
         },
     ]);
+    
     const guestCartStore = useSelector((store: StoreType) => {
         return store.guestCartStore
     })

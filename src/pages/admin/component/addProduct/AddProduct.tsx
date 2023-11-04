@@ -196,7 +196,7 @@ export default function AddProduct() {
                             </div>
                         </div>
                         <div className="save_btn"> <button type="submit">{loading ? <span className='loading-spinner'></span> : "Save"}</button>
-                            {/* <button className='button'>{loading ? <span className='loading-spinner'></span> : "Sign Up"}</button> */}
+                           
                         </div>
                     </div>
 
