@@ -122,7 +122,7 @@ function OffCanvasExample({ name, placement }: OffCanvasExampleProps) {
                     <div className="container_search_main">
                         {searchStatus ? (
                             <div className="loading">
-                                <Spin indicator="https://png.pngtree.com/png-vector/20200224/ourmid/pngtree-colorful-loading-icon-png-image_2152960.jpg" />
+                                {/* <Spin indicator="https://png.pngtree.com/png-vector/20200224/ourmid/pngtree-colorful-loading-icon-png-image_2152960.jpg" /> */}
                             </div>
                         ) : (
                             <>
