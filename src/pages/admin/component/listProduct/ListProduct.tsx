@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./listproduct.scss"
+import "./listProduct.scss"
 // import AddProduct from "../AddProduct/AddProduct";
 import apis from "@/services/Apis";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
