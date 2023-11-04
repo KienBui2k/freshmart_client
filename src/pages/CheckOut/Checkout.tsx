@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import "./checkout.scss"
 import { StoreType } from "@/stores"
 import { useNavigate } from "react-router-dom"
-import { Modal, message } from "antd"
+import { Modal, QRCode, message } from "antd"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { guestCartActions } from "@/stores/slices/guestCart.slice"
@@ -50,6 +50,7 @@ export default function Checkout() {
 
   function checkout(e: React.FormEvent) {
     e.preventDefault()
+    
     let guest = {
       name: ((e.target as any).firstName.value + (e.target as any).lastName.value),
       numberPhone: (e.target as any).phone.value,
@@ -128,7 +129,7 @@ export default function Checkout() {
         <h2>Check Out</h2>
       </div>
       {
-        useStore.cartPayQr && < value={useStore.cartPayQr} icon='https://cafebiz.cafebizcdn.vn/thumb_w/600/162123310254002176/2022/7/9/photo1657324993775-1657324993859181735127.jpg' />
+        useStore.cartPayQr && <QRCode value={useStore.cartPayQr} icon='https://cafebiz.cafebizcdn.vn/thumb_w/600/162123310254002176/2022/7/9/photo1657324993775-1657324993859181735127.jpg' />
       }
       <div className="checkout_body">
         <form
